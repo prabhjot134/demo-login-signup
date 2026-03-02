@@ -55,9 +55,9 @@ function UserTable() {
                 <tbody>
                     {users.map((u, i) => (
                         <tr key={i}>
-                            <td style={{ padding: '8px' }}>{u.FullName}</td>
-                            <td style={{ padding: '8px' }}>{u.Email}</td>
-                            <td style={{ padding: '8px' }}>{u.CreatedAt}</td>
+                            <td style={{ padding: '8px' }}>{u.fullname}</td>
+                            <td style={{ padding: '8px' }}>{u.email}</td>
+                            <td style={{ padding: '8px' }}>{u.createdat}</td>
                         </tr>
                     ))}
                 </tbody>

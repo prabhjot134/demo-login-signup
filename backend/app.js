@@ -1,30 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { connect } = require('./db.js');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173'
+}));
 
-// Connect to DB
-connect()
-    .then(() => console.log("Connected to the database."))
-    .catch((error) => {
-        console.log("Database connection failed!");
-        console.log(error);
-    });
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-// All auth routes are prefixed with /api/auth
+app.get('/', (req, res) => res.send('Hello World!'));
 app.use('/api/auth', authRoutes);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));

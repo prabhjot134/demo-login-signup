@@ -41,7 +41,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
 });
 
 api.interceptors.request.use((config) => {
@@ -57,7 +57,7 @@ api.interceptors.request.use((config) => {
 
 export const loginUser = (credentials) => api.post('/api/auth/login', credentials);
 
-export const signupUser = (userData) => api.post('/signup', userData);
+export const signupUser = (userData) => api.post('/api/auth/signup', userData);
 
 export const fetchUsersList = (page, search = '') => 
     api.get(`/api/auth/users?page=${page}&search=${encodeURIComponent(search)}`);
